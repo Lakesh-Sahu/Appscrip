@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+}
+
+group = 'com'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.22.0'
+
+    implementation group: 'org.testng', name: 'testng', version: '7.11.0'
+}
+
+tasks.named('test') {
+    useTestNG() {
+        suites "src/test/resources/testng.xml"
+    }
+
+    outputs.upToDateWhen {
+        false
+    }
+
+    testLogging {
+        events "PASSED", "FAILED", "SKIPPED", "STANDARD_OUT", "STANDARD_ERROR"
+    }
+}
