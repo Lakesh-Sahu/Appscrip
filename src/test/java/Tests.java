@@ -5,17 +5,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.*;
 
 import java.time.Duration;
 
-public class Test {
+public class Tests {
 
     @org.testng.annotations.Test
     public void test01() {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         String url = "https://web.platform.kwibal.com/";
         driver.get(url);
@@ -34,8 +33,10 @@ public class Test {
             Thread.sleep(5000);
             WebElement zeroResultText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(., '0 search results for')]")));
             System.out.println("Test Case Failed : No Result Found");
+            driver.quit();
             Assert.fail();
         } catch (Exception ignore) {
+            driver.quit();
         }
 
         System.out.println("Test Case Passed");
